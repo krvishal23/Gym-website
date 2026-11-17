@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IronPulse Fitness | Strength & Conditioning Club</title>
+  <link rel="preconnect" href="https://googleapis.com" />
+  <link rel="preconnect" href="https://gstatic.com" crossorigin />
+  <link href="https://googleapis.com/css2?family=Oswald:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #0d0f12;
+      --bg-card: #161a20;
+      --bg-elevated: #1e232b;
+      --primary: #ff4d24;
+      --primary-hover: #e03e19;
+      --text-main: #f4f6f8;
+      --text-muted: #9aa4b2;
+      --border: #2a303c;
+      --radius: 10px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      background-color: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background-color: rgba(255, 77, 36, 0.1);
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(13, 15, 18, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 76px;
+    }
+
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 6rem 0 5rem;
+      background: linear-gradient(to right, rgba(13, 15, 18, 0.95) 45%, rgba(13, 15, 18, 0.65)),
+                  url('https://unsplash.com') center/cover no-repeat;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-content {
+      max-width: 620px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(255, 77, 36, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(255, 77, 36, 0.35);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat h3 {
+      font-size: 1.9rem;
+      color: var(--primary);
+    }
+
+    .stat p {
+      font-size: 0.85rem;
+      margin: 0;
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+    }
+
+    /* Programs */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 77, 36, 0.12);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Pricing */
+    .pricing-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--primary);
+      background: var(--bg-elevated);
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: -13px;
+      right: 20px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-family: 'Oswald', sans-serif;
+      margin: 1rem 0;
+    }
+
+    .price span {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .features-list {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .features-list li {
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .features-list li::before {
+      content: "✓ ";
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* BMI & Contact Split */
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .result-box {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      background: var(--bg-dark);
+      border-left: 3px solid var(--primary);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        flex-direction: column;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav .btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">IRON<span>PULSE</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#membership">Membership</a></li>
+        <li><a href="#tools">BMI & Trial</a></li>
+      </ul>
+      <a href="#tools" class="btn">Free Day Pass</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <span class="badge">OPEN 24/7 • CERTIFIED COACHES</span>
+        <h1>FORGE YOUR <span>STRONGEST</span> SELF</h1>
+        <p>Competition-grade powerlifting platforms, functional turf zones, and science-backed personal coaching built for real results.</p>
+        <div class="hero-actions">
+          <a href="#membership" class="btn">Explore Plans</a>
+          <a href="#programs" class="btn btn-outline">View Programs</a>
+        </div>
+
+        <div class="stats-bar">
+          <div class="stat">
+            <h3>15,000+</h3>
+            <p>Sq. Ft. Training Floor</p>
+          </div>
+          <div class="stat">
+            <h3>25+</h3>
+            <p>Certified Trainers</p>
